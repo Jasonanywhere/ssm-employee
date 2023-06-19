@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title>用户</title>
+    <link rel="stylesheet" th:href="@{/static/css/employee_list.css}">
+</head>
+<body marginheight="0" marginwidth="0">
+
+<form th:action="@{'/deleteChecked/'+${page.pageNum}}" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <table border="0.5" cellpadding="12" cellspacing="1"  style="text-align: center">
+        <thead>
+           <tr>
+              <th colspan="7" id="theadFirstTh">Employee Info</th>
+           </tr>
+           <tr>
+              <!--document.querySelector('thead').querySelectorAll('input')[0]; -->
+              <th><input type="checkbox"></th>
+              <th>emp_id</th>
+              <th>emp_name</th>
+              <th>age</th>
+              <th>sex</th>
+              <th>email</th>
+              <th>
+                 <a th:href="@{'/insert/'+${page.pages}}">add</a>
+                  <!--document.querySelector('thead').querySelectorAll('input')[1]; -->
+                 <input type="submit" value="deleteChecked" id="checkedInput">
+              </th>
+           </tr>
+        </thead>
+        <tbody>
+           <tr th:each="employee : ${page.list}" id="tbodyFirstTr">
+              <td><input type="checkbox" name="empIds" th:value="${employee.empId}"></td>
+              <td th:text="${employee.empId}"></td>
+              <td th:text="${employee.empName}"></td>
+              <td th:text="${employee.age}"></td>
+              <td th:text="${employee.sex}"></td>
+              <td th:text="${employee.email}"></td>
+              <td id="tdOption">
+                  <a th:if="${page.size>1}" th:href="@{'/delete/'+${employee.empId}+'/'+${page.pageNum}}" id="firstDelete">delete</a>
+                  <a th:if="${page.size==1}" th:href="@{'/delete/'+${employee.empId}+'/'+${page.prePage}}" id="secondDelete">delete</a>
+
+                  <span th:each="num : ${page.navigatepageNums}">
+                     <a th:if="${page.pageNum==num}" th:href="@{'/update/'+${employee.empId}+'/'+${num}}" id="update">update</a>
+                  </span>
+              </td>
+           </tr>
+           <tr id="tbodySecondTr">
+              <td colspan="7" id="tbodySecondTh">
+              <span th:if="${page.hasPreviousPage}">
+                  <a th:href="@{/employee/page/1}">首页</a>
+                  <a th:href="@{'/employee/page/'+${page.prePage}}">上一页</a>
+              </span>
+
+              <span th:each="num : ${page.navigatepageNums}">
+                  <a th:if="${page.pageNum==num}"
+                     th:href="@{'/employee/page/'+${num}}" th:text="'['+${num}+']'" style="color:red;"></a>
+
+                  <a th:if="${page.pageNum!=num}"
+                     th:href="@{'/employee/page/'+${num}}" th:text="${num} "></a>
+              </span>
+
+              <span th:if="${page.hasNextPage}">
+                  <a th:href="@{'/employee/page/'+${page.nextPage}}">下一页</a>
+                  <a th:href="@{'/employee/page/'+${page.pages}}">末页</a>
+              </span>
+              </td>
+           </tr>
+        </tbody>
+
+    </table>
+</form>
+
+<script>
+    var flag=0;//记录复选框状态
+    var headFirstCheckbox=document.querySelector('thead').querySelectorAll('input')[0];
+    var submit=document.querySelector('thead').querySelectorAll('input')[1];
+    var checkbox=document.querySelector('tbody').querySelectorAll('input');
+
+    //触发thead的复选框
+    headFirstCheckbox.onclick=function (){
+        if(this.checked){
+            for(var i=0;i<checkbox.length;i++){
+                checkbox[i].checked='checked';
+                submit.style.display='block';
+            }
+        }else{
+            for(var i=0;i<checkbox.length;i++){
+                checkbox[i].checked=false;
+                submit.style.display='none';
+            }
+        }
+    }
+
+    //触发tbody的复选框
+    for(var i=0;i<checkbox.length;i++){
+        checkbox[i].onclick=function (){
+            if(!this.checked){
+                headFirstCheckbox.checked=false;
+
+                /*
+                其中一个复选框取消选中，遍历此页面复选框状态，只要有一个还在选中状态，
+                headSecondCheckbox就继续显示（在flag为1时）
+                */
+                for(var i=0;i<checkbox.length;i++){
+                    if (checkbox[i].checked){
+                        flag+=1;
+                        break;
+                    }
+                }
+                if (flag===1){
+                    submit.style.display='block';
+                    flag=0;//恢复为0,其他复选框执行要执行相同的流程，如果不为0，会影响判断结果
+                }else{
+                    submit.style.display='none';
+                }
+            }else {
+                submit.style.display='block';
+            }
+        }
+    }
+</script>
+<a th:href="@{/}" class="a1" id="frontDesktop">返回前台</a>
+</body>
+</html>

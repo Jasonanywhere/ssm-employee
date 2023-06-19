@@ -1,0 +1,65 @@
+body{
+    background-color: RGB(255,255,225);
+}
+#div{
+    margin: 7rem auto;
+    width: 30rem;
+    height: 20rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0.1rem 0.2rem 1.3rem 0 rgba(117, 115, 115, 0.99);
+    padding-top: 0.5rem;
+    box-sizing: border-box;
+}
+table{
+    font-weight: bolder;
+}
+
+#submit{
+    border-radius: 0.3rem;
+    border-style: solid;
+    border-color: #9595da;
+    background-color: #3e3ecb;
+    width: 5rem;
+    height: 3rem;
+    color: white;
+    font-weight: bolder;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#firstTr input{
+    font-size: 1.2rem;
+    border-radius: 0.3rem;
+    height: 2rem;
+}
+
+#secondTr input{
+    font-size: 1.2rem;
+    border-radius: 0.3rem;
+    height: 2rem;
+}
+
+#thirdTr input{
+    font-size: 1.2rem;
+    border-radius: 0.3rem;
+    height: 2rem;
+}
+
+#cancel{
+    padding-top: 0.7rem;
+    box-sizing: border-box;
+    margin-top: -3rem;
+    float:right;
+    display:block;
+    width: 5rem;
+    height: 3rem;
+    background-color: rgba(210, 56, 56, 0.88);
+    border-color: #c48383;
+    border-radius: 0.3rem;
+    border-style: solid;
+    color: white;
+    font-weight: bolder;
+    font-size: 1rem;
+    text-decoration: none;
+}

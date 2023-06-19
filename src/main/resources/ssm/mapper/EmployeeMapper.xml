@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace的值为mapper接口文件的位置加接口文件名-->
+<mapper namespace="ssm.mapper.EmployeeMapper">
+    <!--
+      mapper接口和映射文件要保持两个一致
+      1.mapper接口的全类名和映射文件的namespace一致
+      2.mapper接口中的方法的方法名要和映射文件中的sql保持一致
+    -->
+
+    <!--对应接口文件的方法-->
+
+    <!--List<Employee> getEmployeeList();-->
+    <select id="getEmployeeList" resultType="Employee">
+        select * from t_emp
+    </select>
+
+    <!--Employee getEmployeeById(@Param("id") Integer id);-->
+    <select id="getEmployeeById" resultType="Employee">
+        select * from t_emp where emp_id = #{id}
+    </select>
+
+    <!--void updateEmployeeById(@Param("emloyee") Employee employee,@Param("id") Integer id);-->
+    <update id="updateEmployeeById">
+        update t_emp set emp_name=#{employee.empName},age=#{employee.age},sex=#{employee.sex},email=#{employee.email} where emp_id=#{id}
+    </update>
+
+    <!--void insertEmployee(@Param("employee") Employee employee);-->
+    <insert id="insertEmployee">
+        insert into t_emp values(null,#{employee.empName},#{employee.age},#{employee.sex},#{employee.email});
+    </insert>
+
+    <!--void deleteEmployeeById(@Param("id") Integer id);-->
+    <delete id="deleteEmployeeById">
+        delete from t_emp where emp_id=#{id}
+    </delete>
+
+    <!--void deleteCheckedById(@Param("empIds") Integer[] empIds);-->
+    <delete id="deleteCheckedById">
+        delete from t_emp where emp_id in
+        <foreach collection="empIds" item="empId" open="(" close=")" separator=",">
+            #{empId}
+        </foreach>
+    </delete>
+</mapper>
