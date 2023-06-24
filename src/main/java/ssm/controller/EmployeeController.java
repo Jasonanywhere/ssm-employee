@@ -75,4 +75,22 @@ public class EmployeeController {
         }
         return "redirect:/employee/page/"+pageNum;
     }
+
+    //跳转到查询结果页面
+    @RequestMapping(value = "/search/{pageNum}",method = RequestMethod.GET)
+    public String toSearch(Employee employee,Model model,@PathVariable("pageNum") Integer pageNum){
+        PageInfo<Employee> page = employeeService.getEmployeeByName(pageNum,employee.getEmpName());
+        model.addAttribute("empName",employee.getEmpName());
+        model.addAttribute("page",page);
+        return "search_employee_list";
+    }
+
+    //在查询结果页面实现翻页
+    @RequestMapping(value = "/search/{empName}/{pageNum}",method = RequestMethod.GET)
+    public String searchEmployee(@PathVariable("empName") String empName,Model model,@PathVariable("pageNum") Integer pageNum){
+        PageInfo<Employee> page = employeeService.getEmployeeByName(pageNum,empName);
+        model.addAttribute("empName",empName);
+        model.addAttribute("page",page);
+        return "search_employee_list";
+    }
 }

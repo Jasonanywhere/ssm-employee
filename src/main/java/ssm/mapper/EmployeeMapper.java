@@ -19,4 +19,6 @@ public interface EmployeeMapper {
     void deleteEmployeeById(@Param("id") Integer id);
 
     void deleteCheckedById(@Param("empIds") Integer[] empIds);
+
+    List<Employee> getEmployeeListByName(@Param("empName") String empName);
 }

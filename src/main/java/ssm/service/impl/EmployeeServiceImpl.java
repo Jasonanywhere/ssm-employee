@@ -50,4 +50,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void deleteChecked(Integer[] empIds) {
         employeeMapper.deleteCheckedById(empIds);
     }
+
+    @Override
+    public PageInfo<Employee> getEmployeeByName(Integer pageNum, String empName) {
+        PageHelper.startPage(pageNum, 8);
+        List<Employee> employeeList = employeeMapper.getEmployeeListByName(empName);
+        PageInfo<Employee> page = new PageInfo<>(employeeList, 4);
+        return page;
+    }
+
 }

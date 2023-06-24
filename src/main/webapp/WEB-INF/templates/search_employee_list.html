@@ -6,7 +6,7 @@
     <meta name="viewport"
           content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
     <title>用户</title>
-    <link rel="stylesheet" th:href="@{/static/css/employee_list.css}">
+    <link rel="stylesheet" th:href="@{/static/css/search_employee_list.css}">
     <style>
         #searchDiv{
             margin: 1rem auto;
@@ -50,7 +50,7 @@
     var searchInput=document.getElementById('searchInput');
     var img=document.querySelector('img');
     var searchSubmit=document.getElementById('searchDiv').querySelectorAll('input')[1];
-    console.log(searchSubmit);
+
     searchInput.onfocus=function (){
         if(this.value==='输入要查询人员的姓名'){
             this.value='';
@@ -85,7 +85,6 @@
               <th>sex</th>
               <th>email</th>
               <th>
-                 <a th:href="@{'/insert/'+${page.pages}}">add</a>
                   <!--document.querySelector('thead').querySelectorAll('input')[1]; -->
                  <input type="submit" value="deleteChecked" id="checkedInput">
               </th>
@@ -111,21 +110,21 @@
            <tr id="tbodySecondTr">
               <td colspan="7" id="tbodySecondTh">
               <span th:if="${page.hasPreviousPage}">
-                  <a th:href="@{/employee/page/1}">首页</a>
-                  <a th:href="@{'/employee/page/'+${page.prePage}}">上一页</a>
+                  <a th:href="@{'/search/'+${empName}+'/'+1}">首页</a>
+                  <a th:href="@{'/search/'+${empName}+'/'+${page.prePage}}">上一页</a>
               </span>
 
               <span th:each="num : ${page.navigatepageNums}">
                   <a th:if="${page.pageNum==num}"
-                     th:href="@{'/employee/page/'+${num}}" th:text="'['+${num}+']'" style="color:red;"></a>
+                     th:href="@{'/search/'+${empName}+'/'+${num}}" th:text="'['+${num}+']'" style="color:red;"></a>
 
                   <a th:if="${page.pageNum!=num}"
-                     th:href="@{'/employee/page/'+${num}}" th:text="${num} "></a>
+                     th:href="@{'/search/'+${empName}+'/'+${num}}" th:text="${num}"></a>
               </span>
 
               <span th:if="${page.hasNextPage}">
-                  <a th:href="@{'/employee/page/'+${page.nextPage}}">下一页</a>
-                  <a th:href="@{'/employee/page/'+${page.pages}}">末页</a>
+                  <a th:href="@{'/search/'+${empName}+'/'+${page.nextPage}}">下一页</a>
+                  <a th:href="@{'/search/'+${empName}+'/'+${page.pages}}">末页</a>
               </span>
               </td>
            </tr>
@@ -183,6 +182,6 @@
         }
     }
 </script>
-<a th:href="@{/}" class="a1" id="frontDesktop">返回前台</a>
+<a th:href="@{/employee/page/1}" class="a1" id="employeeList">查看所有人员</a>
 </body>
 </html>

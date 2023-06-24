@@ -17,4 +17,6 @@ public interface EmployeeService {
     void deleteEmployee(Integer id);
 
     void deleteChecked(Integer[] empIds);
+
+    PageInfo<Employee> getEmployeeByName(Integer pageNum, String empName);
 }

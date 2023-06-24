@@ -1,5 +1,5 @@
 body{
-    background-color: rgba(145, 145, 211, 0.34);
+    background-color: #aed9ae;
 }
 
 a{
@@ -29,15 +29,6 @@ table thead th{
 
 table tbody td{
     background-color: rgba(119, 118, 118, 0.46);
-}
-
-table thead a{
-    color: white;
-    border-radius: 0.2rem;
-    border-color: rgba(158, 224, 224, 0.38);
-    display: block;
-    border-style: solid;
-    background-color: rgba(140, 206, 206, 0.91);
 }
 
 table thead input{
@@ -97,7 +88,7 @@ table thead input{
     border-radius: 0 0 0.3rem 0.3rem;
 }
 
-#frontDesktop{
+#employeeList{
     color: white;
     border-radius: 0.2rem;
     border-color: #decc9f;
@@ -106,7 +97,7 @@ table thead input{
     background-color: #d57c33;
     margin: auto;
     text-align: center;
-    width: 6rem;
+    width: 8rem;
     height: 2rem;
     box-sizing: border-box;
     padding-top: 0.4rem;

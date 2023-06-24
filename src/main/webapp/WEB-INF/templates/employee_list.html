@@ -7,9 +7,68 @@
           content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
     <title>用户</title>
     <link rel="stylesheet" th:href="@{/static/css/employee_list.css}">
+    <style>
+        #searchDiv{
+            margin: 1rem auto;
+            width: 13rem;
+            height: 3rem;
+            background-color: white;
+            border-radius: 0.4rem;
+            padding-top: 0.5rem;
+            box-sizing: border-box;
+        }
+
+        #searchInput{
+            border: 0;
+            margin-left: 1rem;
+            width: 9rem;
+            height: 2rem;
+            outline: none;
+            color: rgba(54, 53, 53, 0.58);
+        }
+
+        img{
+            margin-top: 0.4rem;
+            margin-right: 0.5rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            float: right;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body marginheight="0" marginwidth="0">
+<div id="searchDiv">
+    <form th:action="@{/search/1}" method="get">
+        <input type="text" name="empName" value="输入要查询人员的姓名" id="searchInput">
+        <img th:src="@{/static/img/R-C.png}">
+        <input type="submit" style="display: none">
+    </form>
+</div>
 
+<script>
+    var searchInput=document.getElementById('searchInput');
+    var img=document.querySelector('img');
+    var searchSubmit=document.getElementById('searchDiv').querySelectorAll('input')[1];
+    console.log(searchSubmit);
+    searchInput.onfocus=function (){
+        if(this.value==='输入要查询人员的姓名'){
+            this.value='';
+            this.style.color='black';
+        }
+    }
+
+    searchInput.onblur=function (){
+        if(this.value===''){
+            this.value='输入要查询人员的姓名';
+            this.style.color='rgba(54, 53, 53, 0.58)';
+        }
+    }
+
+    img.onclick=function (){
+        searchSubmit.click();
+    }
+</script>
 <form th:action="@{'/deleteChecked/'+${page.pageNum}}" method="post">
     <input type="hidden" name="_method" value="delete">
     <table border="0.5" cellpadding="12" cellspacing="1"  style="text-align: center">

@@ -45,4 +45,9 @@
             #{empId}
         </foreach>
     </delete>
+
+    <!--List<Employee> getEmployeeListByName(@Param("empName") String empName);-->
+    <select id="getEmployeeListByName" resultType="Employee">
+        select * from t_emp where emp_name like '%${empName}%'
+    </select>
 </mapper>
