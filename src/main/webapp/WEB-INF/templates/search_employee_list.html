@@ -66,7 +66,11 @@
     }
 
     img.onclick=function (){
-        searchSubmit.click();
+        if (searchInput.value==='' || searchInput.value==='输入要查询人员的姓名'){
+            alert('输入信息为空');
+        }else {
+            searchSubmit.click();
+        }
     }
 </script>
 <form th:action="@{'/deleteChecked/'+${page.pageNum}}" method="post">

@@ -38,6 +38,7 @@
     </style>
 </head>
 <body marginheight="0" marginwidth="0">
+
 <div id="searchDiv">
     <form th:action="@{/search/1}" method="get">
         <input type="text" name="empName" value="输入要查询人员的姓名" id="searchInput">
@@ -50,7 +51,7 @@
     var searchInput=document.getElementById('searchInput');
     var img=document.querySelector('img');
     var searchSubmit=document.getElementById('searchDiv').querySelectorAll('input')[1];
-    console.log(searchSubmit);
+
     searchInput.onfocus=function (){
         if(this.value==='输入要查询人员的姓名'){
             this.value='';
@@ -66,71 +67,75 @@
     }
 
     img.onclick=function (){
-        searchSubmit.click();
+        if (searchInput.value==='' || searchInput.value==='输入要查询人员的姓名'){
+            alert('输入信息为空');
+        }else {
+            searchSubmit.click();
+        }
     }
 </script>
+
 <form th:action="@{'/deleteChecked/'+${page.pageNum}}" method="post">
     <input type="hidden" name="_method" value="delete">
     <table border="0.5" cellpadding="12" cellspacing="1"  style="text-align: center">
         <thead>
-           <tr>
-              <th colspan="7" id="theadFirstTh">Employee Info</th>
-           </tr>
-           <tr>
-              <!--document.querySelector('thead').querySelectorAll('input')[0]; -->
-              <th><input type="checkbox"></th>
-              <th>emp_id</th>
-              <th>emp_name</th>
-              <th>age</th>
-              <th>sex</th>
-              <th>email</th>
-              <th>
-                 <a th:href="@{'/insert/'+${page.pages}}">add</a>
-                  <!--document.querySelector('thead').querySelectorAll('input')[1]; -->
-                 <input type="submit" value="deleteChecked" id="checkedInput">
-              </th>
-           </tr>
+        <tr>
+            <th colspan="7" id="theadFirstTh">Employee Info</th>
+        </tr>
+        <tr>
+            <!--document.querySelector('thead').querySelectorAll('input')[0]; -->
+            <th><input type="checkbox"></th>
+            <th>emp_id</th>
+            <th>emp_name</th>
+            <th>age</th>
+            <th>sex</th>
+            <th>email</th>
+            <th>
+                <a th:href="@{'/insert/'+${page.pages}}">add</a>
+                <!--document.querySelector('thead').querySelectorAll('input')[1]; -->
+                <input type="submit" value="deleteChecked" id="checkedInput">
+            </th>
+        </tr>
         </thead>
         <tbody>
-           <tr th:each="employee : ${page.list}" id="tbodyFirstTr">
-              <td><input type="checkbox" name="empIds" th:value="${employee.empId}"></td>
-              <td th:text="${employee.empId}"></td>
-              <td th:text="${employee.empName}"></td>
-              <td th:text="${employee.age}"></td>
-              <td th:text="${employee.sex}"></td>
-              <td th:text="${employee.email}"></td>
-              <td id="tdOption">
-                  <a th:if="${page.size>1}" th:href="@{'/delete/'+${employee.empId}+'/'+${page.pageNum}}" id="firstDelete">delete</a>
-                  <a th:if="${page.size==1}" th:href="@{'/delete/'+${employee.empId}+'/'+${page.prePage}}" id="secondDelete">delete</a>
+        <tr th:each="employee : ${page.list}" id="tbodyFirstTr">
+            <td><input type="checkbox" name="empIds" th:value="${employee.empId}"></td>
+            <td th:text="${employee.empId}"></td>
+            <td th:text="${employee.empName}"></td>
+            <td th:text="${employee.age}"></td>
+            <td th:text="${employee.sex}"></td>
+            <td th:text="${employee.email}"></td>
+            <td id="tdOption">
+                <a th:if="${page.size>1}" th:href="@{'/delete/'+${employee.empId}+'/'+${page.pageNum}}" id="firstDelete" >delete</a>
+                <a th:if="${page.size==1}" th:href="@{'/delete/'+${employee.empId}+'/'+${page.prePage}}" id="secondDelete" >delete</a>
 
-                  <span th:each="num : ${page.navigatepageNums}">
-                     <a th:if="${page.pageNum==num}" th:href="@{'/update/'+${employee.empId}+'/'+${num}}" id="update">update</a>
-                  </span>
-              </td>
-           </tr>
-           <tr id="tbodySecondTr">
-              <td colspan="7" id="tbodySecondTh">
-              <span th:if="${page.hasPreviousPage}">
-                  <a th:href="@{/employee/page/1}">首页</a>
-                  <a th:href="@{'/employee/page/'+${page.prePage}}">上一页</a>
+                <span th:each="num : ${page.navigatepageNums}">
+                 <a th:if="${page.pageNum==num}" th:href="@{'/update/'+${employee.empId}+'/'+${num}}" id="update">update</a>
               </span>
+            </td>
+        </tr>
+        <tr id="tbodySecondTr">
+            <td colspan="7" id="tbodySecondTh">
+          <span th:if="${page.hasPreviousPage}">
+              <a th:href="@{/employee/page/1}">首页</a>
+              <a th:href="@{'/employee/page/'+${page.prePage}}">上一页</a>
+          </span>
 
-              <span th:each="num : ${page.navigatepageNums}">
-                  <a th:if="${page.pageNum==num}"
-                     th:href="@{'/employee/page/'+${num}}" th:text="'['+${num}+']'" style="color:red;"></a>
+                <span th:each="num : ${page.navigatepageNums}">
+              <a th:if="${page.pageNum==num}"
+                 th:href="@{'/employee/page/'+${num}}" th:text="'['+${num}+']'" style="color:red;"></a>
 
-                  <a th:if="${page.pageNum!=num}"
-                     th:href="@{'/employee/page/'+${num}}" th:text="${num} "></a>
-              </span>
+              <a th:if="${page.pageNum!=num}"
+                 th:href="@{'/employee/page/'+${num}}" th:text="${num} "></a>
+          </span>
 
-              <span th:if="${page.hasNextPage}">
-                  <a th:href="@{'/employee/page/'+${page.nextPage}}">下一页</a>
-                  <a th:href="@{'/employee/page/'+${page.pages}}">末页</a>
-              </span>
-              </td>
-           </tr>
+                <span th:if="${page.hasNextPage}">
+              <a th:href="@{'/employee/page/'+${page.nextPage}}">下一页</a>
+              <a th:href="@{'/employee/page/'+${page.pages}}">末页</a>
+          </span>
+            </td>
+        </tr>
         </tbody>
-
     </table>
 </form>
 
