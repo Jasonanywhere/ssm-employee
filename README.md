@@ -15,7 +15,7 @@ This project is about a system for employee information management，The main fu
 1. Modify employee information
 2. Delete employee information
 3. Add employee information
-
+4. Implement queries to employees
 #### Data
 1. employee Table
 2. Department Table (none)
