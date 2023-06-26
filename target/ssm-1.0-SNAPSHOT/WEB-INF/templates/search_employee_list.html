@@ -6,36 +6,7 @@
     <meta name="viewport"
           content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
     <title>用户</title>
-    <link rel="stylesheet" th:href="@{/static/css/search_employee_list.css}">
-    <style>
-        #searchDiv{
-            margin: 1rem auto;
-            width: 13rem;
-            height: 3rem;
-            background-color: white;
-            border-radius: 0.4rem;
-            padding-top: 0.5rem;
-            box-sizing: border-box;
-        }
-
-        #searchInput{
-            border: 0;
-            margin-left: 1rem;
-            width: 9rem;
-            height: 2rem;
-            outline: none;
-            color: rgba(54, 53, 53, 0.58);
-        }
-
-        img{
-            margin-top: 0.4rem;
-            margin-right: 0.5rem;
-            width: 1.5rem;
-            height: 1.5rem;
-            float: right;
-            cursor: pointer;
-        }
-    </style>
+    <link th:rel="stylesheet" th:href="@{/static/css/search.css}">
 </head>
 <body marginheight="0" marginwidth="0">
 <div id="searchDiv">
@@ -73,7 +44,7 @@
         }
     }
 </script>
-<form th:action="@{'/deleteChecked/'+${page.pageNum}}" method="post">
+<form th:if="${Empty}==1" th:action="@{'/deleteChecked/'+${page.pageNum}}" method="post">
     <input type="hidden" name="_method" value="delete">
     <table border="0.5" cellpadding="12" cellspacing="1"  style="text-align: center">
         <thead>
@@ -133,16 +104,16 @@
               </td>
            </tr>
         </tbody>
-
     </table>
 </form>
+
+<p th:if="${Empty}==0"><b>无结果</b></p>
 
 <script>
     var flag=0;//记录复选框状态
     var headFirstCheckbox=document.querySelector('thead').querySelectorAll('input')[0];
     var submit=document.querySelector('thead').querySelectorAll('input')[1];
     var checkbox=document.querySelector('tbody').querySelectorAll('input');
-
     //触发thead的复选框
     headFirstCheckbox.onclick=function (){
         if(this.checked){
@@ -186,6 +157,6 @@
         }
     }
 </script>
-<a th:href="@{/employee/page/1}" class="a1" id="employeeList">查看所有人员</a>
+<a th:href="@{/employee/page/1}" id="employeeList">查看所有人员</a>
 </body>
 </html>

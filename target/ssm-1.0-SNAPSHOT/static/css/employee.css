@@ -1,0 +1,147 @@
+body{
+    background-color: rgba(145, 145, 211, 0.34);
+}
+
+a{
+    text-decoration: none;
+}
+
+table{
+    font-weight: bolder;
+    margin: 3rem auto;
+}
+
+table th{
+    width: 10.3rem;
+}
+table td{
+    width: 10.3rem;
+}
+
+#theadFirstTh{
+    border-radius: 0.3rem 0.3rem 0 0;
+}
+
+table thead th{
+    background-color: rgba(55, 55, 68, 0.89);
+    color: white;
+}
+
+table tbody td{
+    background-color: rgba(119, 118, 118, 0.46);
+}
+
+table thead a{
+    color: white;
+    border-radius: 0.2rem;
+    border-color: rgba(158, 224, 224, 0.38);
+    display: block;
+    border-style: solid;
+    background-color: rgba(140, 206, 206, 0.91);
+}
+
+table thead input{
+    border-radius: 0.2rem;
+    border-color: rgba(224, 158, 185, 0.38);
+    width: 11rem;
+    border-style: solid;
+    color: white;
+    font: 1rem "Microsoft YaHei UI";
+    font-weight: bolder;
+    background-color: #de0909;
+    cursor: pointer;
+}
+
+#firstDelete{
+    border-color: rgba(224, 158, 185, 0.38);
+    border-radius: 0.2rem;
+    margin-left: 0.5rem;
+    float: left;
+    width: 4rem;
+    display: block;
+    border-style: solid;
+    background-color: rgba(231, 78, 119, 0.91);
+    color: white;
+}
+
+#secondDelete{
+    border-color: rgba(224, 158, 185, 0.38);
+    border-radius: 0.2rem;
+    margin-left: 0.5rem;
+    float: left;
+    width: 4rem;
+    display: block;
+    border-style: solid;
+    background-color: rgba(206, 140, 158, 0.91);
+    color: white;
+}
+
+#update{
+    border-color: rgba(158, 224, 224, 0.38);
+    border-radius: 0.2rem;
+    margin-left: 0.5rem;
+    float: left;
+    width: 4rem;
+    display: block;
+    border-style: solid;
+    background-color: rgba(140, 206, 206, 0.91);
+    color: white;
+}
+
+#tbodySecondTr a{
+    margin-left: 0.2rem;
+    color: rgba(0, 0, 0, 0.49);
+}
+
+#tbodySecondTh{
+    border-radius: 0 0 0.3rem 0.3rem;
+}
+
+#frontDesktop{
+    color: white;
+    border-radius: 0.2rem;
+    border-color: #decc9f;
+    display: block;
+    border-style: solid;
+    background-color: #d57c33;
+    margin: auto;
+    text-align: center;
+    width: 6rem;
+    height: 2rem;
+    box-sizing: border-box;
+    padding-top: 0.4rem;
+    font-weight: bolder;
+}
+
+#checkedInput{
+    margin: auto;
+    display: none;
+}
+
+#searchDiv{
+    margin: 1rem auto;
+    width: 13rem;
+    height: 3rem;
+    background-color: white;
+    border-radius: 0.4rem;
+    padding-top: 0.5rem;
+    box-sizing: border-box;
+}
+
+#searchInput{
+    border: 0;
+    margin-left: 1rem;
+    width: 9rem;
+    height: 2rem;
+    outline: none;
+    color: rgba(54, 53, 53, 0.58);
+}
+
+img{
+    margin-top: 0.4rem;
+    margin-right: 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    float: right;
+    cursor: pointer;
+}

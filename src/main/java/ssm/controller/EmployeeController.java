@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import ssm.pojo.Employee;
 import ssm.service.EmployeeService;
 
+import java.util.List;
+
 @Controller
 public class EmployeeController {
 
@@ -79,7 +81,18 @@ public class EmployeeController {
     //跳转到查询结果页面
     @RequestMapping(value = "/search/{pageNum}",method = RequestMethod.GET)
     public String toSearch(Employee employee,Model model,@PathVariable("pageNum") Integer pageNum){
+        int Empty;//查询后，用来标记是否获取到了信息
+
         PageInfo<Employee> page = employeeService.getEmployeeByName(pageNum,employee.getEmpName());
+        List<Employee> list = page.getList();
+        if (list.isEmpty()){
+            Empty=0;
+            model.addAttribute("Empty",Empty);
+        }else {
+            Empty=1;
+            model.addAttribute("Empty",Empty);
+        }
+
         model.addAttribute("empName",employee.getEmpName());
         model.addAttribute("page",page);
         return "search_employee_list";
@@ -88,7 +101,9 @@ public class EmployeeController {
     //在查询结果页面实现翻页
     @RequestMapping(value = "/search/{empName}/{pageNum}",method = RequestMethod.GET)
     public String searchEmployee(@PathVariable("empName") String empName,Model model,@PathVariable("pageNum") Integer pageNum){
+        int Empty=1;
         PageInfo<Employee> page = employeeService.getEmployeeByName(pageNum,empName);
+        model.addAttribute("Empty",Empty);
         model.addAttribute("empName",empName);
         model.addAttribute("page",page);
         return "search_employee_list";
